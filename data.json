@@ -14,6 +14,17 @@
           "name": "Cubs Cause Chaos"
         }
       ]
+    },
+    {
+      "id": "dsp",
+      "name": "DSP",
+      "description": "Watch leading on yachts (teaching the crew)",
+      "refs": [
+        {
+          "id": "summer-sail-2026",
+          "name": "Summer sail 2026"
+        }
+      ]
     }
   ],
   "logs": [
@@ -42,6 +53,19 @@
       "endDate": "2026-09-20",
       "evidence": [],
       "createdAt": 1790807445064
+    },
+    {
+      "id": "muooodysrp39",
+      "activityId": "dsp",
+      "activity": "DSP",
+      "referenceId": "summer-sail-2026",
+      "reference": "Summer sail 2026",
+      "hours": 168,
+      "assessor": "Nigel Spiers / Luke VB / Tony Butcher",
+      "startDate": "2026-09-18",
+      "endDate": "2026-09-20",
+      "evidence": [],
+      "createdAt": 1790807717501
     }
   ]
 }
