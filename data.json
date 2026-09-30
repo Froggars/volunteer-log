@@ -101,19 +101,6 @@
       "endDate": "2026-09-30",
       "evidence": [],
       "createdAt": 1790808325750
-    },
-    {
-      "id": "muopjdtbme0s",
-      "activityId": "keep-sailing",
-      "activity": "Keep Sailing",
-      "referenceId": "island-barn",
-      "reference": "Island Barn",
-      "hours": 1,
-      "assessor": "Richard",
-      "startDate": "2026-09-30",
-      "endDate": "2026-09-30",
-      "evidence": [],
-      "createdAt": 1790809163594
     }
   ]
 }
