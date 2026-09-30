@@ -1,17 +1,6 @@
 {
   "activities": [
     {
-      "id": "test",
-      "name": "Test",
-      "description": "Testing",
-      "refs": [
-        {
-          "id": "first-test",
-          "name": "First test"
-        }
-      ]
-    },
-    {
       "id": "cubs-yl",
       "name": "Cubs YL",
       "description": "Volenteering as a young leader for Cub Scouts",
