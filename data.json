@@ -88,19 +88,6 @@
       "endDate": "2026-09-20",
       "evidence": [],
       "createdAt": 1790807717501
-    },
-    {
-      "id": "muop1fdbyzbb",
-      "activityId": "hws-esports-coordinator",
-      "activity": "HWS ESports Coordinator",
-      "referenceId": "weekly",
-      "reference": "Weekly",
-      "hours": 1,
-      "assessor": "Tino",
-      "startDate": "2026-09-30",
-      "endDate": "2026-09-30",
-      "evidence": [],
-      "createdAt": 1790808325750
     }
   ]
 }
