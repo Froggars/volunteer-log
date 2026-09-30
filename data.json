@@ -12,19 +12,5 @@
       ]
     }
   ],
-  "logs": [
-    {
-      "id": "muoo5j7vs03g",
-      "activityId": "test",
-      "activity": "Test",
-      "referenceId": "first-test",
-      "reference": "First test",
-      "hours": 1,
-      "assessor": "RAYE",
-      "startDate": "2026-09-30",
-      "endDate": "2026-09-30",
-      "evidence": [],
-      "createdAt": 1790806837819
-    }
-  ]
+  "logs": []
 }
