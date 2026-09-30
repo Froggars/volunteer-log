@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Volunteering Hours Log</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1d2330;--mut:#667085;--bd:#dde1e8;--ac:#2f6f4f;--acx:#fff;--err:#b42318}
+@media (prefers-color-scheme:dark){:root{--bg:#14171c;--card:#1d222a;--tx:#e9ecf1;--mut:#98a2b3;--bd:#323945;--ac:#5fc08e;--acx:#0d1a13;--err:#f97066}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.5rem;margin:0 0 4px}h2{font-size:1.1rem;margin:0 0 12px}
+.sub{color:var(--mut);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:18px}
+label{display:block;font-weight:600;font-size:.85rem;margin:10px 0 4px}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+button{font:inherit;border:0;border-radius:8px;padding:9px 16px;cursor:pointer;background:var(--ac);color:var(--acx);font-weight:600}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.g{background:transparent;color:var(--ac);border:1px solid var(--bd);padding:6px 12px}
+button.x{background:transparent;color:var(--err);padding:4px 8px}
+.ev{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--bd);vertical-align:top}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+a{color:var(--ac)}.ei{display:block;margin-bottom:2px;word-break:break-word}
+.bar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}
+.bar select{width:auto;min-width:180px}
+.tot{font-weight:700}.msg{color:var(--err);margin-top:8px;min-height:1.2em}.mut{color:var(--mut)}
+</style>
+</head>
+<body>
+<main>
+<h1>🤝 Volunteering Hours Log</h1>
+<p class="sub">Record volunteering, attach evidence and name who will assess it.</p>
+
+<div class="card" id="conn">
+<h2>Connect to GitHub</h2>
+<p class="mut" style="margin:0 0 8px">Paste your access token once on this device so logs can be saved. It stays in this browser only.</p>
+<div class="row"><input id="tok" type="password" placeholder="github_pat_…" autocomplete="off"><div><button id="connect" type="button">Connect</button></div></div>
+</div>
+
+<div class="card" id="formCard">
+<h2>Submit a new log</h2>
+<div class="row">
+<div><label for="date">Start date</label><input id="date" type="date"></div>
+<div><label for="endDate">End date</label><input id="endDate" type="date"></div>
+</div>
+<div class="row">
+<div><label for="act">Activity</label><select id="act"></select>
+<input id="newAct" placeholder="New activity name" style="display:none;margin-top:8px">
+<textarea id="newDesc" rows="3" placeholder="Activity description (what the activity involves)" style="display:none;margin-top:8px"></textarea>
+<div id="actDesc" class="mut" style="margin-top:6px;font-size:.85rem"></div></div>
+<div><label for="ref">Specific reference</label><select id="ref"></select>
+<input id="newRef" placeholder="New reference (e.g. session, event or project)" style="display:none;margin-top:8px"></div>
+<div><label for="hours">Hours logged</label><input id="hours" type="number" min="0.25" step="0.25" placeholder="e.g. 2.5"></div>
+<div><label for="assessor">Assessor</label><input id="assessor" placeholder="Teacher / supervisor"></div>
+</div>
+<label>Evidence <span class="mut" style="font-weight:400">(a link or a note – add as many as you like)</span></label>
+<div id="evs"></div>
+<button class="g" id="addEv" type="button">+ Add evidence</button>
+<div style="margin-top:14px"><button id="submit" type="button">Submit log</button></div>
+<div class="msg" id="msg"></div>
+</div>
+
+<div class="card">
+<div class="bar"><h2 style="margin:0">Log table</h2><select id="fAct"></select></div>
+<div class="bar"><span class="tot" id="total"></span><span class="mut"><span id="status">Loading…</span> <button class="x" id="disc" type="button" style="display:none">Disconnect</button></span></div>
+<div class="tw"><table><thead><tr><th>Dates</th><th>Activity</th><th>Reference</th><th>Hours</th><th>Evidence</th><th>Assessor</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+</div>
+</main>
+<script>
+/* ====== EDIT THESE THREE LINES ====== */
+const CFG={owner:"YOUR-USERNAME",repo:"volunteer-log",branch:"main",path:"data.json"};
+/* ==================================== */
+const $=id=>document.getElementById(id);
+const NEW="__new__";
+const API=`https://api.github.com/repos/${CFG.owner}/${CFG.repo}/contents/${CFG.path}`;
+let D={activities:[],logs:[]};
+const tok=()=>localStorage.getItem("vlog_token")||"";
+const hdr=()=>({Accept:"application/vnd.github+json",Authorization:"Bearer "+tok()});
+const slug=s=>s.trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60);
+const el=(t,p={},...k)=>{const e=document.createElement(t);for(const a in p){a==="class"?e.className=p[a]:a==="text"?e.textContent=p[a]:e[a]=p[a]}k.forEach(c=>e.append(c));return e};
+const dec=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g,"")),c=>c.charCodeAt(0)));
+const enc=t=>{let s="";new TextEncoder().encode(t).forEach(c=>s+=String.fromCharCode(c));return btoa(s)};
+const fmtD=l=>{const s=l.startDate||"",e=l.endDate||s;return s===e?s:s+" → "+e};
+
+async function apiGet(){
+  const r=await fetch(API+"?ref="+CFG.branch+"&t="+Date.now(),{headers:hdr()});
+  if(r.status===404)return{data:{activities:[],logs:[]},sha:null};
+  if(!r.ok)throw new Error("GitHub error "+r.status+(r.status===401?" – check your token":r.status===403?" – check token permissions":""));
+  const j=await r.json(),d=JSON.parse(dec(j.content));
+  d.activities=d.activities||[];d.logs=d.logs||[];return{data:d,sha:j.sha};
+}
+async function apiPut(data,sha,message){
+  const body={message,content:enc(JSON.stringify(data,null,2)),branch:CFG.branch};if(sha)body.sha=sha;
+  const r=await fetch(API,{method:"PUT",headers:{...hdr(),"Content-Type":"application/json"},body:JSON.stringify(body)});
+  if(!r.ok){const e=new Error("Save failed ("+r.status+")"+(r.status===404||r.status===403?" – check token permissions":""));e.status=r.status;throw e}
+}
+async function save(message,mutate){
+  for(let i=0;i<2;i++){
+    const{data,sha}=await apiGet();mutate(data);
+    try{await apiPut(data,sha,message);D=data;return}
+    catch(e){if((e.status!==409&&e.status!==422)||i)throw e}
+  }
+}
+async function load(){
+  try{
+    if(tok())D=(await apiGet()).data;
+    else{const r=await fetch(CFG.path+"?t="+Date.now());D=r.ok?await r.json():{activities:[],logs:[]}}
+    D.activities=D.activities||[];D.logs=D.logs||[];
+    $("status").textContent=tok()?"Connected to GitHub":"Read-only";
+  }catch(e){$("status").textContent=e.message}
+  fillSelects();renderRows();
+}
+function syncConn(){
+  const on=!!tok();
+  $("conn").style.display=on?"none":"block";$("disc").style.display=on?"inline":"none";
+  $("submit").disabled=!on;
+  if(!on)$("msg").textContent="Connect to GitHub above to save logs.";else if($("msg").textContent.startsWith("Connect"))$("msg").textContent="";
+}
+$("connect").onclick=()=>{const t=$("tok").value.trim();if(!t)return;localStorage.setItem("vlog_token",t);$("tok").value="";syncConn();load()};
+$("disc").onclick=()=>{localStorage.removeItem("vlog_token");syncConn();load()};
+
+$("date").valueAsDate=new Date();$("endDate").valueAsDate=new Date();
+$("date").onchange=()=>{if(!$("endDate").value||$("endDate").value<$("date").value)$("endDate").value=$("date").value};
+
+function addEvRow(){
+  const r=el("div",{class:"ev"});
+  r.append(el("input",{placeholder:"Link or description of evidence"}));
+  r.append(el("button",{class:"x",type:"button",text:"✕",onclick:()=>r.remove()}));
+  $("evs").append(r);
+}
+$("addEv").onclick=addEvRow;addEvRow();
+
+const sorted=a=>[...a].sort((x,y)=>x.name.localeCompare(y.name));
+function fillSelects(){
+  const cur=$("act").value,curF=$("fAct").value,names=sorted(D.activities);
+  $("act").replaceChildren(el("option",{value:"",text:"Choose an activity…"}),...names.map(a=>el("option",{value:a.id,text:a.name})),el("option",{value:NEW,text:"＋ Add a new activity…"}));
+  $("fAct").replaceChildren(el("option",{value:"",text:"All activities"}),...names.map(a=>el("option",{value:a.id,text:a.name})));
+  $("act").value=[...$("act").options].some(o=>o.value===cur)?cur:"";
+  $("fAct").value=[...$("fAct").options].some(o=>o.value===curF)?curF:"";
+  showAct();
+}
+function showAct(){
+  const v=$("act").value,isNew=v===NEW,a=D.activities.find(x=>x.id===v);
+  $("newAct").style.display=isNew?"block":"none";$("newDesc").style.display=isNew?"block":"none";
+  $("actDesc").textContent=a&&a.description?a.description:"";
+  fillRef();
+}
+function fillRef(){
+  const v=$("act").value,a=D.activities.find(x=>x.id===v),cur=$("ref").value;
+  $("ref").disabled=!v;
+  $("ref").replaceChildren(el("option",{value:"",text:v?"Choose a reference…":"Choose an activity first"}),
+    ...sorted(a?a.refs||[]:[]).map(r=>el("option",{value:r.id,text:r.name})),
+    ...(v?[el("option",{value:NEW,text:"＋ Add a new reference…"})]:[]));
+  $("ref").value=v===NEW?NEW:([...$("ref").options].some(o=>o.value===cur)?cur:"");
+  $("newRef").style.display=$("ref").value===NEW?"block":"none";
+}
+$("act").onchange=showAct;$("ref").onchange=fillRef;$("fAct").onchange=renderRows;
+
+function renderRows(){
+  const f=$("fAct").value;
+  const list=D.logs.filter(l=>!f||l.activityId===f).sort((a,b)=>(b.startDate||"").localeCompare(a.startDate||"")||(b.createdAt||0)-(a.createdAt||0));
+  const tb=$("rows");tb.replaceChildren();let sum=0;
+  list.forEach(l=>{
+    sum+=Number(l.hours)||0;
+    const evc=el("td");
+    (l.evidence||[]).forEach(e=>{
+      const t=e.text||"";
+      evc.append(/^https?:\/\//i.test(t)?el("a",{class:"ei",href:t,target:"_blank",rel:"noopener noreferrer",text:t}):el("span",{class:"ei",text:t}));
+    });
+    if(!(l.evidence||[]).length)evc.append(el("span",{class:"mut",text:"—"}));
+    const a=D.activities.find(x=>x.id===l.activityId),act=el("td",{text:l.activity||""});
+    if(a&&a.description)act.append(el("div",{class:"mut",style:"font-size:.8rem;margin-top:2px",text:a.description}));
+    const del=el("td");if(tok())del.append(el("button",{class:"x",text:"Delete",onclick:()=>delLog(l.id)}));
+    tb.append(el("tr",{},el("td",{text:fmtD(l)}),act,el("td",{text:l.reference||"—"}),el("td",{text:String(l.hours)}),evc,el("td",{text:l.assessor||""}),del));
+  });
+  if(!list.length)tb.append(el("tr",{},el("td",{colSpan:7,class:"mut",text:"No logs yet."})));
+  $("total").textContent="Total: "+(Math.round(sum*100)/100)+" hours ("+list.length+" logs)";
+}
+async function delLog(id){
+  if(!confirm("Delete this log?"))return;
+  try{await save("Delete log",d=>{d.logs=d.logs.filter(x=>x.id!==id)});renderRows()}catch(e){alert(e.message)}
+}
+
+$("submit").onclick=async()=>{
+  const msg=$("msg");msg.style.color="";msg.textContent="";
+  const assessor=$("assessor").value.trim(),hours=parseFloat($("hours").value),date=$("date").value,endDate=$("endDate").value||date;
+  let aid=$("act").value,aname="",adesc="",rid=$("ref").value,rname="";
+  if(!date)return msg.textContent="Please enter a start date.";
+  if(endDate<date)return msg.textContent="The end date can't be before the start date.";
+  if(!aid)return msg.textContent="Please choose an activity.";
+  if(aid===NEW){aname=$("newAct").value.trim();adesc=$("newDesc").value.trim();aid=slug(aname);if(!aid)return msg.textContent="Please name the new activity."}
+  if(!rid)return msg.textContent="Please choose a reference for the activity.";
+  if(rid===NEW){rname=$("newRef").value.trim();rid=slug(rname);if(!rid)return msg.textContent="Please name the new reference."}
+  if(!(hours>0))return msg.textContent="Please enter the hours logged.";
+  if(!assessor)return msg.textContent="Please enter an assessor.";
+  const logId=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  const evidence=[...$("evs").querySelectorAll("input")].map(i=>i.value.trim()).filter(Boolean).map(text=>({text}));
+  $("submit").disabled=true;msg.textContent="Saving…";
+  try{
+    await save("Add log",d=>{
+      let a=d.activities.find(x=>x.id===aid);
+      if(!a){a={id:aid,name:aname,description:adesc,refs:[]};d.activities.push(a)}
+      a.refs=a.refs||[];
+      let r=a.refs.find(x=>x.id===rid)||a.refs.find(x=>x.name===rname);
+      if(!r){r={id:rid,name:rname||rid};a.refs.push(r)}
+      d.logs.push({id:logId,activityId:a.id,activity:a.name,referenceId:r.id,reference:r.name,hours,assessor,startDate:date,endDate,evidence,createdAt:Date.now()});
+    });
+    $("hours").value="";$("evs").replaceChildren();addEvRow();$("act").value="";$("newAct").value="";$("newDesc").value="";$("newRef").value="";
+    fillSelects();renderRows();
+    msg.style.color="var(--ac)";msg.textContent="Log saved to GitHub.";
+    setTimeout(()=>{msg.textContent="";msg.style.color=""},4000);
+  }catch(e){msg.textContent="Could not save: "+e.message}
+  $("submit").disabled=!tok();
+};
+
+syncConn();load();
+</script>
+</body>
+</html>
