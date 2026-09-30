@@ -8,6 +8,10 @@
         {
           "id": "weekly",
           "name": "Weekly"
+        },
+        {
+          "id": "cubs-cause-chaos",
+          "name": "Cubs Cause Chaos"
         }
       ]
     }
@@ -25,6 +29,19 @@
       "endDate": "2026-09-28",
       "evidence": [],
       "createdAt": 1790807020785
+    },
+    {
+      "id": "muooijsunkir",
+      "activityId": "cubs-yl",
+      "activity": "Cubs YL",
+      "referenceId": "cubs-cause-chaos",
+      "reference": "Cubs Cause Chaos",
+      "hours": 47,
+      "assessor": "Susan Baker",
+      "startDate": "2026-09-18",
+      "endDate": "2026-09-20",
+      "evidence": [],
+      "createdAt": 1790807445064
     }
   ]
 }
