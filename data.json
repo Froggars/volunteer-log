@@ -10,7 +10,32 @@
           "name": "First test"
         }
       ]
+    },
+    {
+      "id": "cubs-yl",
+      "name": "Cubs YL",
+      "description": "Volenteering as a young leader for Cub Scouts",
+      "refs": [
+        {
+          "id": "weekly",
+          "name": "Weekly"
+        }
+      ]
     }
   ],
-  "logs": []
+  "logs": [
+    {
+      "id": "muoo9gc4nm6k",
+      "activityId": "cubs-yl",
+      "activity": "Cubs YL",
+      "referenceId": "weekly",
+      "reference": "Weekly",
+      "hours": 39,
+      "assessor": "Susan Baker",
+      "startDate": "2026-01-19",
+      "endDate": "2026-09-28",
+      "evidence": [],
+      "createdAt": 1790807020785
+    }
+  ]
 }
