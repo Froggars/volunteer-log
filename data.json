@@ -64,6 +64,10 @@
         {
           "id": "open-evening",
           "name": "Open evening"
+        },
+        {
+          "id": "send-tour",
+          "name": "SEND Tour"
         }
       ]
     }
@@ -159,6 +163,23 @@
       "endDate": "2026-10-05",
       "evidence": [],
       "createdAt": 1791240228587
+    },
+    {
+      "id": "muvudbuno40k",
+      "activityId": "hws-parents-tour",
+      "activity": "HWS Parents",
+      "referenceId": "send-tour",
+      "reference": "SEND Tour",
+      "hours": 1,
+      "assessor": "Miss SENDco?",
+      "startDate": "2026-10-05",
+      "endDate": "2026-10-05",
+      "evidence": [
+        {
+          "text": "Not sure what date"
+        }
+      ],
+      "createdAt": 1791240542427
     }
   ]
 }
