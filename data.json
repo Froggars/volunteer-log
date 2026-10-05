@@ -50,8 +50,8 @@
     },
     {
       "id": "hws-parents-tour",
-      "name": "HWS Parents Tour",
-      "description": "Showed perspective parents around school",
+      "name": "HWS Parents",
+      "description": "Doing anything representing the school like open evening, SEND tours, other tours",
       "refs": [
         {
           "id": "tour",
@@ -116,7 +116,7 @@
     {
       "id": "muvtxoi5x63j",
       "activityId": "hws-parents-tour",
-      "activity": "HWS Parents Tour",
+      "activity": "HWS Parents",
       "referenceId": "tour",
       "reference": "Tour",
       "hours": 3,
@@ -129,7 +129,7 @@
     {
       "id": "muvu0h1332yh",
       "activityId": "hws-parents-tour",
-      "activity": "HWS Parents Tour",
+      "activity": "HWS Parents",
       "referenceId": "tour",
       "reference": "Tour",
       "hours": 3,
