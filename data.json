@@ -47,6 +47,17 @@
           "name": "Island Barn"
         }
       ]
+    },
+    {
+      "id": "hws-parents-tour",
+      "name": "HWS Parents Tour",
+      "description": "Showed perspective parents around school",
+      "refs": [
+        {
+          "id": "tour",
+          "name": "Tour"
+        }
+      ]
     }
   ],
   "logs": [
@@ -101,6 +112,19 @@
       "endDate": "2026-10-05",
       "evidence": [],
       "createdAt": 1791239644800
+    },
+    {
+      "id": "muvtxoi5x63j",
+      "activityId": "hws-parents-tour",
+      "activity": "HWS Parents Tour",
+      "referenceId": "tour",
+      "reference": "Tour",
+      "hours": 3,
+      "assessor": "Mrs Greelish",
+      "startDate": "2026-01-19",
+      "endDate": "2026-09-28",
+      "evidence": [],
+      "createdAt": 1791239812299
     }
   ]
 }
