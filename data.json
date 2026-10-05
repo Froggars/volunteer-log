@@ -125,6 +125,19 @@
       "endDate": "2026-09-28",
       "evidence": [],
       "createdAt": 1791239812299
+    },
+    {
+      "id": "muvu0h1332yh",
+      "activityId": "hws-parents-tour",
+      "activity": "HWS Parents Tour",
+      "referenceId": "tour",
+      "reference": "Tour",
+      "hours": 3,
+      "assessor": "Mrs Greelish",
+      "startDate": "2026-10-05",
+      "endDate": "2026-10-05",
+      "evidence": [],
+      "createdAt": 1791239942597
     }
   ]
 }
