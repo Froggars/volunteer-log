@@ -34,6 +34,10 @@
         {
           "id": "weekly",
           "name": "Weekly"
+        },
+        {
+          "id": "taster-tryouts",
+          "name": "Taster / Tryouts"
         }
       ]
     },
@@ -155,6 +159,19 @@
       "endDate": "2026-09-24",
       "evidence": [],
       "createdAt": 1791240131363
+    },
+    {
+      "id": "muvu6lpddaym",
+      "activityId": "hws-esports-coordinator",
+      "activity": "HWS ESports Coordinator",
+      "referenceId": "taster-tryouts",
+      "reference": "Taster / Tryouts",
+      "hours": 1,
+      "assessor": "Mr Constantino",
+      "startDate": "2026-10-05",
+      "endDate": "2026-10-05",
+      "evidence": [],
+      "createdAt": 1791240228587
     }
   ]
 }
