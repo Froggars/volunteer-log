@@ -229,10 +229,11 @@
       "reference": "Conference",
       "hours": 4.5,
       "assessor": "Philipa Guildford",
-      "startDate": "2026-10-12",
-      "endDate": "2026-10-12",
+      "startDate": "2026-10-11",
+      "endDate": "2026-10-11",
       "evidence": [],
-      "createdAt": 1791837829607
+      "createdAt": 1791837829607,
+      "updatedAt": 1791837843962
     }
   ]
 }
