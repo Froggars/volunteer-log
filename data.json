@@ -171,7 +171,7 @@
       "referenceId": "send-tour",
       "reference": "SEND Tour",
       "hours": 1,
-      "assessor": "Miss SENDco?",
+      "assessor": "Miss Clegg?",
       "startDate": "2026-10-05",
       "endDate": "2026-10-05",
       "evidence": [
@@ -179,7 +179,8 @@
           "text": "Not sure what date"
         }
       ],
-      "createdAt": 1791240542427
+      "createdAt": 1791240542427,
+      "updatedAt": 1791835502703
     },
     {
       "id": "mv5oig22thtq",
