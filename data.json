@@ -12,6 +12,10 @@
         {
           "id": "cubs-cause-chaos",
           "name": "Cubs Cause Chaos"
+        },
+        {
+          "id": "conference",
+          "name": "Conference"
         }
       ]
     },
@@ -216,6 +220,19 @@
       "endDate": "2026-10-12",
       "evidence": [],
       "createdAt": 1791835591660
+    },
+    {
+      "id": "mv5pz9l86p5z",
+      "activityId": "cubs-yl",
+      "activity": "Cubs YL",
+      "referenceId": "conference",
+      "reference": "Conference",
+      "hours": 4.5,
+      "assessor": "Philipa Guildford",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "evidence": [],
+      "createdAt": 1791837829607
     }
   ]
 }
