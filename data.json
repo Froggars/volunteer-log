@@ -193,6 +193,19 @@
       "endDate": "2026-10-12",
       "evidence": [],
       "createdAt": 1791835365211
+    },
+    {
+      "id": "mv5ojc3py3bp",
+      "activityId": "hws-parents-tour",
+      "activity": "HWS Parents",
+      "referenceId": "tour",
+      "reference": "Tour",
+      "hours": 4,
+      "assessor": "Miss Greelish",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-12",
+      "evidence": [],
+      "createdAt": 1791835406744
     }
   ]
 }
