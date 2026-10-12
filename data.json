@@ -172,15 +172,11 @@
       "reference": "SEND Tour",
       "hours": 1,
       "assessor": "Miss Clegg?",
-      "startDate": "2026-10-05",
-      "endDate": "2026-10-05",
-      "evidence": [
-        {
-          "text": "Not sure what date"
-        }
-      ],
+      "startDate": "2026-09-16",
+      "endDate": "2026-09-16",
+      "evidence": [],
       "createdAt": 1791240542427,
-      "updatedAt": 1791835502703
+      "updatedAt": 1791835624624
     },
     {
       "id": "mv5oig22thtq",
