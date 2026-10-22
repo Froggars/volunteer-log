@@ -234,6 +234,19 @@
       "evidence": [],
       "createdAt": 1791837829607,
       "updatedAt": 1791837843962
+    },
+    {
+      "id": "mvk0z0l4bfz5",
+      "activityId": "keep-sailing",
+      "activity": "Keep Sailing",
+      "referenceId": "island-barn",
+      "reference": "Volunteer Assistant Instructor",
+      "hours": 23.25,
+      "assessor": "Richard Sawyer",
+      "startDate": "2026-10-20",
+      "endDate": "2026-10-22",
+      "evidence": [],
+      "createdAt": 1792702820239
     }
   ]
 }
