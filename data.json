@@ -220,6 +220,19 @@
       "endDate": "2026-10-22",
       "evidence": [],
       "createdAt": 1792702820239
+    },
+    {
+      "id": "mvl509quggl3",
+      "activityId": "cubs-yl",
+      "activity": "Cubs YL",
+      "referenceId": "weekly",
+      "reference": "Weekly",
+      "hours": 2.83,
+      "assessor": "Susan Baker",
+      "startDate": "2026-09-15",
+      "endDate": "2026-09-15",
+      "evidence": [],
+      "createdAt": 1792770063607
     }
   ]
 }
