@@ -281,6 +281,19 @@
       "endDate": "2026-11-02",
       "evidence": [],
       "createdAt": 1793657991322
+    },
+    {
+      "id": "mw9ir3u1b0i4",
+      "activityId": "hws-esports-coordinator",
+      "activity": "HWS ESports Coordinator",
+      "referenceId": "taster-tryouts",
+      "reference": "Taster / Tryouts",
+      "hours": 1.5,
+      "assessor": "Michael Constantino",
+      "startDate": "2026-11-08",
+      "endDate": "2026-11-08",
+      "evidence": [],
+      "createdAt": 1794244338693
     }
   ]
 }
