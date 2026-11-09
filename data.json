@@ -289,11 +289,12 @@
       "referenceId": "taster-tryouts",
       "reference": "Taster / Tryouts",
       "hours": 1.5,
-      "assessor": "Michael Constantino",
+      "assessor": "Mr Constantino",
       "startDate": "2026-11-08",
       "endDate": "2026-11-08",
       "evidence": [],
-      "createdAt": 1794244338693
+      "createdAt": 1794244338693,
+      "updatedAt": 1794244441215
     }
   ]
 }
