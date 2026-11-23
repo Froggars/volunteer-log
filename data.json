@@ -347,19 +347,6 @@
       "endDate": "2026-11-22",
       "evidence": [],
       "createdAt": 1795452738591
-    },
-    {
-      "id": "mwti7u77ne57",
-      "activityId": "dsp",
-      "activity": "DSP",
-      "referenceId": "summer-sail-2026",
-      "reference": "Refit Weekends",
-      "hours": 7.5,
-      "assessor": "David Christian / Nigel Spiers",
-      "startDate": "2026-11-22",
-      "endDate": "2026-11-22",
-      "evidence": [],
-      "createdAt": 1795452765589
     }
   ]
 }
